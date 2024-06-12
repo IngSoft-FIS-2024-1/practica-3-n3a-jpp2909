@@ -29,16 +29,17 @@ describe('Book', () => {
   });
 
   it('check author is a string', () => {
-    // TODO
+    expect(() => new Book('Cuentos de la Selva', 12345, 350)).toThrow('El autor debe ser una cadena de caracteres.');
   });
 
   it('check page param is a number', () => {
-    // TODO
+    expect(() => new Book('Cuentos de la Selva', 'Horacio Quiroga', 'three hundred fifty')).toThrow('El número de páginas debe ser un número.');
   });
 
   it('check pages not < 1', () => {
-    // TODO
+    expect(() => new Book('Cuentos de la Selva', 'Horacio Quiroga', 0)).toThrow('El número de páginas debe ser al menos 1.');
   });
+  
   it('toString()', () => {
     // TODO
   });
