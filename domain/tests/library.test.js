@@ -10,15 +10,15 @@ describe('Library', () => {
   });
 
   it('add a book to the library', () => {
-    myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120);
+    myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120, 2000);
     const aBook = myLibrary.getInventory()[myLibrary.getInventory().length - 1];
     expect(aBook).toBeInstanceOf(Book);
     expect(aBook.getTitle()).toBe('Cuentos de la Selva');
   });
 
   it('return the total number of books', () => {
-    myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120);
-    myLibrary.addBook('El Hombre que Calculaba', 'Malba Tahan', 286);
+    myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120,2000);
+    myLibrary.addBook('El Hombre que Calculaba', 'Malba Tahan', 286,2000);
     expect(myLibrary.totalBooks()).toBe(2);
   });
 
@@ -30,8 +30,31 @@ describe('Library', () => {
   it('throw an error when setting an invalid name', () => {
     expect(() => myLibrary.setName(123)).toThrow();
   });
+
   it('throw an error when setting an empty name', () => {
-    expect(() => myLibrary.setName('')).toThrow('El nombre no puede estar vacío.');
+    expect(() => myLibrary.setName('')).toThrow();
+  });
+
+  it('return the correct total number of words', () => {
+    myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120, 2000);
+    myLibrary.addBook('El Hombre que Calculaba', 'Malba Tahan', 286, 2000);
+    expect(myLibrary.totalWords()).toBe(4000);
+  });
+
+  it('return 0 total words for an empty library', () => {
+    expect(myLibrary.totalWords()).toBe(0);
+  });
+
+  it('return the correct total words after adding a book', () => {
+    myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120, 2000);
+    expect(myLibrary.totalWords()).toBe(2000);
+  });
+
+  it('return the correct total words after adding multiple books', () => {
+    myLibrary.addBook('Cuentos de la Selva', 'Horacio Quiroga', 120, 2000);
+    myLibrary.addBook('El Hombre que Calculaba', 'Malba Tahan', 286, 2000);
+    myLibrary.addBook('El Principito', 'Antoine de Saint-Exupéry', 96, 2000);
+    expect(myLibrary.totalWords()).toBe(6000);
   });
 
 });

@@ -13,11 +13,11 @@ class Library {
 
   setName(name) {
     if (typeof (name) !== "string") {
-      throw new Error('El nombre debe ser una cadena de caracteres.')
+      throw new Error()
     }
     name = name.trim();
     if (name.length === 0) {
-      throw new Error("El nombre no puede estar vacío.")
+      throw new Error()
     }
     this.#name = name;
   }
@@ -26,8 +26,8 @@ class Library {
     return this.#name;
   }
 
-  addBook(title, author, pages) {
-    const newBook = new Book(title, author, pages);
+  addBook(title, author, pages, words) {
+    const newBook = new Book(title, author, pages, words);
     this.#inventory.push(newBook);
   }
 
@@ -40,13 +40,11 @@ class Library {
   }
 
   totalWords() {
-    let total = 0;
+    let totalWords = 0;
     this.#inventory.forEach(book => {
-      if (book.getWords()) {
-        total += book.getWords();
-      }
+      totalWords += book.getWords();
     });
-    return total;
+    return totalWords;
   }
 }
 

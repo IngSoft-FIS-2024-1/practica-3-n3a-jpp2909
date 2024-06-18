@@ -9,9 +9,7 @@ class Book {
     this.setTitle(title);
     this.setAuthor(author);
     this.setPages(pages);
-    if (words != undefined) {
-      this.setWords(words);
-    }
+    this.setWords(words);
   }
 
   getTitle() {
@@ -32,18 +30,18 @@ class Book {
 
   setTitle(title) {
     if (typeof (title) !== 'string') {
-      throw new Error('El título debe ser una cadena de caracteres.');
+      throw new Error();
     }
     title = title.trim();
     if (title.length === 0) {
-      throw new Error('El título no puede estar vacío.');
+      throw new Error();
     }
     this.#title = title;
   }
 
   setAuthor(author) {
     if (typeof (author) !== 'string') {
-      throw new Error('El autor debe ser una cadena de caracteres.')
+      throw new Error()
     }
     author = author.trim();
     if (author.length === 0) {
@@ -54,36 +52,32 @@ class Book {
 
   setPages(pages) {
     if (typeof (pages) !== 'number' || isNaN(pages)) {
-      throw new Error('El número de páginas debe ser un número.')
+      throw new Error()
     }
     if (pages < 1) {
-      throw new Error('El número de páginas debe ser al menos 1.')
+      throw new Error()
     }
     pages = Math.trunc(pages);
     this.#pages = pages;
   }
 
-  setWords() {
+  setWords(words) {
     if (typeof (words) !== 'number' || isNaN(words)) {
-      throw new Error('El número de palabras debe ser un número.');
+      throw new Error()
     }
-    if (words < 0) {
-      throw new Error('El número de palabras no puede ser negativo.');
+    if (words < 1) {
+      throw new Error()
     }
     words = Math.trunc(words);
     this.#words = words;
   }
 
   wordsPerPage() {
-    if (this.#words !== undefined && this.#pages > 0) {
-      return this.#words / this.#pages;
-    }
-    return undefined;
+    return this.#words / this.#pages;
   }
 
   toString() {
-    return `Título: ${this.#title} Autor: ${this.#author} Páginas: ${this.#pages}` + 
-    (this.#words !== undefined ? ` Palabras: ${this.#words}` : '');
+    return `Título: ${this.#title} Autor: ${this.#author} Páginas: ${this.#pages} Words: ${this.#words}`;
   }
 }
 
